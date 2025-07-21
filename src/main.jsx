@@ -10,6 +10,7 @@ import { CartProvider } from './components/contexts/cart.context.jsx'
 
 
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -21,5 +22,5 @@ createRoot(document.getElementById('root')).render(
         </CatogoriesProvider>
       </UserProvider>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode >
 )

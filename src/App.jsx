@@ -9,6 +9,7 @@ import CheckOut from "./routes/checkout/checkout.component"
 
 
 
+
 const App = () => {
 
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="checkout" element={<CheckOut />} />
       </Route>
     </Routes>
+
   )
 
 }
