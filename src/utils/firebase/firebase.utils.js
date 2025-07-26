@@ -59,11 +59,13 @@ export const getCollectionAndDocumentsDetails = async (colllectionName) => {
 
         const q = query(collectionRef)
         const querySnapShot = await getDocs(q)
-        const categoriesMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
-            const { title, items } = docSnapShot.data()
-            acc[title.toLowerCase()] = items
-            return acc
-        }, {})
+        const categoriesArray = querySnapShot.docs.map(doc => doc.data())
+        return categoriesArray
+        // const categoriesMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
+        //     const { title, items } = docSnapShot.data()
+        //     acc[title.toLowerCase()] = items
+        //     return acc
+        // }, {})
 
         // const q = query(collectionRef, orderBy("title"))
         // const querySnapshot = await getDocs(q)
@@ -80,7 +82,7 @@ export const getCollectionAndDocumentsDetails = async (colllectionName) => {
         // const querySnapshot = await getDocs(q)
 
         // const categoriesMap = querySnapshot.docs.map(doc => doc.data())
-        return categoriesMap
+        // return categoriesMap
     } catch (e) {
         console.log("error while getting deatils", e.message);
     }
