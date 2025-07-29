@@ -24,6 +24,9 @@ const App = () => {
     })
     return unSubscribe
   }, [])
+  useEffect(() => {
+    document.title = "Crown Clothing | React E-commerce";
+  }, []);
 
   useEffect(() => {
     const addingCollections = async (SHOP_DATA) => {
