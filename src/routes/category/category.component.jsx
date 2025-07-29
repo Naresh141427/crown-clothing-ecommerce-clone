@@ -9,12 +9,10 @@ import { categoriesSelector } from "../../store/categories/categories.selector";
 
 const Category = () => {
     const { category } = useParams();
-    console.log("redner/re-render category component");
     const categoriesMap = useSelector(categoriesSelector)
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        console.log("effect got fired from category component");
         setProducts(categoriesMap[category]);
     }, [category, categoriesMap]);
 
