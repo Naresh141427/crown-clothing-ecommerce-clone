@@ -11,7 +11,7 @@ import {
     Price,
     RemoveButton,
 } from './checkout-item.styles';
-import { addItemsToCart, removeItemsFromCart } from '../../store/cart/cart.action';
+import { addItemsToCart, clearCartItems, removeItemsFromCart } from '../../store/cart/cart.action';
 import { selectCartItems } from '../../store/cart/cart.selector';
 
 const CheckoutItem = ({ cartItem }) => {
@@ -19,7 +19,7 @@ const CheckoutItem = ({ cartItem }) => {
     const { name, imageUrl, price, quantity } = cartItem;
     const dispatch = useDispatch()
 
-    const clearItemHandler = () => dispatch(removeItemsFromCart(cartItems, cartItem));
+    const clearItemHandler = () => dispatch(clearCartItems(cartItems, cartItem));
     const addItemHandler = () => dispatch(addItemsToCart(cartItems, cartItem));
     const removeItemHandler = () => dispatch(removeItemsFromCart(cartItems, cartItem));
 
