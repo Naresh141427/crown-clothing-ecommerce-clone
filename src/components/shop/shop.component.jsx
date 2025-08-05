@@ -5,15 +5,14 @@ import { useDispatch } from "react-redux";
 
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import Category from "../../routes/category/category.component";
-import { getCollectionAndDocumentsDetails } from "../../utils/firebase/firebase.utils";
-import { fetchCategoriesAsync } from "../../store/categories/categories.action";
+import { fetchCategoriesStart } from "../../store/categories/categories.action";
 
 
 
 const Shop = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(fetchCategoriesAsync())
+        dispatch(fetchCategoriesStart())
     }, [])
     return (
         <Routes>
