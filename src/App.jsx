@@ -5,24 +5,19 @@ import MainLayOut from "./components/mainlayout/mainlayout"
 import Authentication from "./routes/authentication/authentication.component"
 import Shop from "./components/shop/shop.component"
 import CheckOut from "./routes/checkout/checkout.component"
-import { addCollectionAndDocuments, createAuthUserWithEmailAndPassword, onAuthStateChangedListener } from "./utils/firebase/firebase.utils"
+import { addCollectionAndDocuments } from "./utils/firebase/firebase.utils"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { checkUserSession } from "./store/user/user.action"
 
-
-import { setCurrentUser } from "./store/user/user.action"
 import SHOP_DATA from "./shop-data"
 
 
 const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    const unSubscribe = onAuthStateChangedListener((user) => {
-      if (user) createAuthUserWithEmailAndPassword(user)
-      dispatch(setCurrentUser(user))
+    dispatch(checkUserSession())
 
-    })
-    return unSubscribe
   }, [])
   useEffect(() => {
     document.title = "Crown Clothing | React E-commerce";

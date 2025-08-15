@@ -87,7 +87,7 @@ export const getCollectionAndDocumentsDetails = async (colllectionName) => {
         console.log("error while getting deatils", e.message);
     }
 }
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalDetails = {}) => {
     if (!userAuth) return
     const userDocRef = doc(db, "users", userAuth.uid)
     // console.log(userDocRef);
@@ -97,18 +97,20 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
     if (!userSnapShot.exists()) {
         const { displayName, email } = userAuth
+        console.log(displayName)
         const createdAt = new Date()
         try {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalDetails
             })
         } catch (err) {
             console.error("error creating user", err.message)
         }
     }
-    return userDocRef
+    return userSnapShot
 
 
 }
@@ -125,3 +127,17 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth)
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unSubscribe = onAuthStateChanged(
+            auth,
+            userAuth => {
+                unSubscribe()
+                resolve(userAuth)
+            },
+            reject
+        )
+    })
+}

@@ -12,7 +12,6 @@ const Category = () => {
     const { category } = useParams();
     const categoriesMap = useSelector(categoriesSelector)
     const isLoading = useSelector(selectCategoriesIsLoading)
-    console.log(isLoading);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
